@@ -14,6 +14,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
+  mainWindow.webContents.openDevTools()
 
   // et chargement de l'index.html de l'application.
   mainWindow.loadFile('index.html')
