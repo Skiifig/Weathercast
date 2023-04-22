@@ -4,11 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src = "api.js" ></script>
+    <script src="./assets/js/envoi.js"></script>
+    <script src="./assets/js/carousel.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@^3.4.1/dist/glide.core.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@^3.4.1/dist/glide.min.js"></script>
 </head>
-<body>
-    
+<body>  
+  <nav class="bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <span class="flex items-center">
+        <img src="./assets/img/logo.png" class="h-8 mr-3">
+        <span href="#" class="text-xl text-white font-bold">Weathercast</span>
+      </span>
+      <div class="flex font-medium mx-auto">
+        <a href="#" class="block py-2 pl-3 pr-4 text-blue-700">Accueil</a>
+        <a href="#" class="block py-2 pl-3 pr-4 text-white">En savoir plus</a>
+        <a href="#" class="block py-2 pl-3 pr-4 text-white">Favoris</a>
+      </div>
+      <form class="relative block">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <button type="button" onclick="envoi()">
+            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+        <input id="search-input" type="text" class="block w-full pl-10 p-2 text-sm bg-gray-700 text-white rounded" placeholder="Recherchez une ville...">
+      </form>
+    </div>
+  </nav>
+
+  <footer></footer>
 </body>
 </html>

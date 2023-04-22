@@ -4,8 +4,10 @@ const { app, BrowserWindow } = electron;
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1368,
+    height: 768,
+    autoHideMenuBar: true,
+    title: "Wheathercast",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -13,5 +15,5 @@ app.on("ready", () => {
     },
   });
   mainWindow.webContents.openDevTools()
-  mainWindow.loadURL(`file://${__dirname}/index.html`);  ``
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
 });
