@@ -1,41 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./assets/js/envoi.js"></script>
-    <script src="./assets/js/carousel.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@^3.4.1/dist/glide.core.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@^3.4.1/dist/glide.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./assets/js/envoi.js"></script>
+  <script src="./assets/js/index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </head>
-<body>  
+<body onload="fillWeather()">
   <nav class="bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <span class="flex items-center">
+      <div class="flex items-center">
         <img src="./assets/img/logo.png" class="h-8 mr-3">
-        <span href="#" class="text-xl text-white font-bold">Weathercast</span>
-      </span>
+        <a href="#" class="text-xl text-white font-bold">Weathercast</a>
+      </div>
       <div class="flex font-medium mx-auto">
         <a href="#" class="block py-2 pl-3 pr-4 text-blue-700">Accueil</a>
         <a href="#" class="block py-2 pl-3 pr-4 text-white">En savoir plus</a>
         <a href="#" class="block py-2 pl-3 pr-4 text-white">Favoris</a>
       </div>
-      <form class="relative block">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-          <button type="button" onclick="envoi()">
-            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
+      <div class="flex cursor-pointer rounded-full hover:bg-gray-700 p-2">
+        <button type="button" data-drawer-target="drawer-settings" data-drawer-show="drawer-settings" data-drawer-placement="right">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="drawer-settings" class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full w-80 bg-gray-800">
+        <h5 id="drawer-right-label" class="inline-flex items-center mb-4 font-semibold text-gray-400">Paramètres</h5>
+        <button type="button" data-drawer-hide="drawer-settings" class="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <div class="flex items-center justify-between mb-6">
+          <h6 class="font-semibold text-white mb-6">Thème</h6>
+          <label class="relative inline-flex items-center mb-4 cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" checked>
+            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-800 bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all border-gray-600 peer-checked:bg-blue-600"></div>
+          </label>
         </div>
-        <input id="search-input" type="text" class="block w-full pl-10 p-2 text-sm bg-gray-700 text-white rounded" placeholder="Recherchez une ville...">
-      </form>
-    </div>
   </nav>
 
-  <footer></footer>
+  <section class="bg-center bg-no-repeat bg-[url('./assets/img/background.jpg')] bg-cover">
+    <div class="px-4 mx-auto text-center max-w-screen-xl py-36">
+      <h1 class="mb-4 text-5xl text-black font-bold">Marre de chercher la météo ?</h1>
+      <h5 class="mb-8 text-lg font-semibold text-gray-500">Weathercast est une application bureau basée sur l'API <a class="hover:underline text-blue-500" href="https://open-meteo.com">Open-météo</a>.</h5>
+      <form class="w-full max-w-md mx-auto">
+        <div class="relative">
+          <button class="absolute inset-y-0 flex items-center pl-3 text-white" type="button" onclick="envoi()">
+            <svg class="w-5 h-5 text-white" data-id="" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+            </svg>
+          </button>
+          <input id="search-input" type="text" class="block w-full p-4 pl-10 text-sm border rounded-lg bg-gray-800 border-gray-700 placeholder-gray-400 text-white focus:border-blue-500" placeholder="Recherchez une ville">
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-4 gap-4 p-4">
+    <div class="relative weather-card">
+      <img class="h-auto max-w-full rounded-lg px-8 pb-4 pt-10" src="">
+      <div class="absolute inset-0">
+        <div class="flex justify-center">
+          <p class="text-white p-2 text-xl font-semibold text-center">Londres</p>
+        </div>
+        <div class="absolute top-0 right-0 p-2 z-10">
+          <svg class="w-8 h-8 text-white cursor-pointer flex hover:text-red-500" data-id="Londres" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+          </svg>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-2xl text-white font-bold pt-5 temperature">X°C</span>
+        </div>
+      </div>
+    </div>
+    <div class="relative weather-card">
+      <img class="h-auto max-w-full rounded-lg px-8 pb-4 pt-10" src="">
+      <div class="absolute inset-0">
+        <div class="flex justify-center">
+          <p class="text-white font-semibold p-2 text-xl text-center">Tokyo</p>
+        </div>
+        <div class="absolute top-0 right-0 p-2 z-10">
+          <svg class="w-8 h-8 text-white cursor-pointer flex hover:text-red-500" data-id="Paris" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+          </svg>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-2xl text-white font-bold pt-5 temperature">X°C</span>
+        </div>
+      </div>
+    </div>
+    <div class="relative weather-card">
+      <img class="h-auto max-w-full rounded-lg px-8 pb-4 pt-10" src="">
+      <div class="absolute inset-0">
+        <div class="flex justify-center">
+          <p class="text-white font-semibold p-2 text-xl text-center">Paris</p>
+        </div>
+        <div class="absolute top-0 right-0 p-2 z-10">
+          <svg class="w-8 h-8 text-white cursor-pointer flex hover:text-red-500" data-id="Paris" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+          </svg>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-2xl text-white font-bold pt-5 temperature">X°C</span>
+        </div>
+      </div>
+    </div>
+    <div class="relative weather-card">
+      <img class="h-auto max-w-full rounded-lg px-8 pb-4 pt-10" src="">
+      <div class="absolute inset-0">
+        <div class="flex justify-center">
+          <p class="text-white font-semibold p-2 text-xl text-center">New York</p>
+        </div>
+        <div class="absolute top-0 right-0 p-2 z-10">
+          <svg class="w-8 h-8 text-white cursor-pointer flex hover:text-red-500" data-id="Paris" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+          </svg>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-2xl text-white font-bold pt-5 temperature">X°C</span>
+        </div>
+      </div>
+    </div>
+    <div class="relative weather-card">
+      <img class="h-auto max-w-full rounded-lg px-8 pb-4 pt-10" src="">
+      <div class="absolute inset-0">
+        <div class="flex justify-center">
+          <p class="text-white font-semibold p-2 text-xl text-center">Pékin</p>
+        </div>
+        <div class="absolute top-0 right-0 p-2 z-10">
+          <svg class="w-8 h-8 text-white cursor-pointer flex hover:text-red-500" data-id="Paris" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+          </svg>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-2xl text-white font-bold pt-5 temperature">X°C</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="shadow bg-gray-800 border-indigo-500 border-t-2">
+    <div class="w-full mx-auto max-w-screen-xl p-4 items-center flex justify-between">
+      <h5 class="text-sm text-center text-gray-400 mx-auto">Weathercast © 2023</h5>
+    </div>
+  </footer>
 </body>
 </html>
