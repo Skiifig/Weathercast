@@ -1,31 +1,37 @@
-function addFav(event) {
-  event.target.setAttribute('fill', 'red');
-  idFav.push(event.target.dataset.id)
+function showAlert(id, type) {
+  var alert = document.getElementById('alert-' + type);
+  var text = document.getElementById('alert-text')
+  alert.classList.replace('opacity-0', 'opacity-1');
+  if (type == 'danger') {
+    text.innerHTML = "Cette ville n'a pas pu être ajouter à votre liste de favoris."
+  } else {
+    text.innerHTML = id + " a bien été ajouté à votre liste de favoris."
+  }
+  setTimeout(() => {
+    alert.classList.replace('opacity-1', 'opacity-0');
+  }, 5000);
 }
 
-function removeFav(event) {
-  event.target.setAttribute('fill', 'none');
-  let index = idFav.indexOf(event.target.dataset.id)
-  if (index != -1) {
-    idFav.splice(index, 1)
+function loadFav() {
+  tabFav = localStorage.getItem('favoris');
+  buttons = document.querySelectorAll('.btn-fav');
+  for (const button of buttons) {
+    if (tabFav.includes(button.dataset.id)) {
+      button.setAttribute('fill', 'red');
+    }
   }
 }
 
 function changeFav(event) {
-  if (!idFav.includes(event.target.dataset.id)) {
-    addFav(event)
-  } else {
-    removeFav(event)
+  var tabFav = JSON.parse(localStorage.getItem("favoris")) || [];
+  var id = event.target.dataset.id;
+  if (id == undefined) {
+    showAlert(id, 'danger')
   }
-  localStorage.setItem('Favoris', idFav)
-  console.log(idFav)
-}
-
-function getFav() {
-  try {
-    var idFav = localStorage.getItem('Favoris')
-  } catch (error) {
-    var idFav = []
+  else if (!tabFav.includes(id)) {
+    event.target.setAttribute('fill', 'red');
+    tabFav.push(id)
+    showAlert(id, 'success')
   }
-  console.log(idFav)
+  localStorage.setItem("favoris", JSON.stringify(tabFav))
 }
