@@ -4,7 +4,7 @@ const { app, BrowserWindow } = electron;
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
-    width: 1368,
+    width: 1268,
     height: 768,
     autoHideMenuBar: true,
     title: "Wheathercast",

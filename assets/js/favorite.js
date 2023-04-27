@@ -1,3 +1,5 @@
+var tabFav = JSON.parse(localStorage.getItem("favoris")) || [];
+
 function showAlert(id, type) {
   var alert = document.getElementById('alert-' + type);
   var text = document.getElementById('alert-text')
@@ -13,7 +15,6 @@ function showAlert(id, type) {
 }
 
 function loadFav() {
-  tabFav = localStorage.getItem('favoris');
   buttons = document.querySelectorAll('.btn-fav');
   for (const button of buttons) {
     if (tabFav.includes(button.dataset.id)) {
@@ -23,7 +24,6 @@ function loadFav() {
 }
 
 function changeFav(event) {
-  var tabFav = JSON.parse(localStorage.getItem("favoris")) || [];
   var id = event.target.dataset.id;
   if (id == undefined) {
     showAlert(id, 'danger')
@@ -34,4 +34,9 @@ function changeFav(event) {
     showAlert(id, 'success')
   }
   localStorage.setItem("favoris", JSON.stringify(tabFav))
+}
+
+function cleanFav() {
+  localStorage.clear()
+  window.location.href = 'index.html'
 }
