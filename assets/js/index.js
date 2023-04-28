@@ -3,7 +3,7 @@ const axios = require('axios');
 const GEOCODING_API_URL = 'https://nominatim.openstreetmap.org/';
 const METEO_API_URL = 'https://api.open-meteo.com/v1/forecast';
 
-async function getCoordinatesForCity(cityName) {
+async function getCoordinatesCity(cityName) {
   const url = `${GEOCODING_API_URL}?q=${encodeURIComponent(cityName)}&format=json`;
 
   const response = await axios.get(url);
@@ -22,7 +22,7 @@ async function getCoordinatesForCity(cityName) {
 
 // Fonction pour récupérer les prévisions météorologiques pour une ville donnée
 async function getWeatherForCity(cityName) {
-  const coordinates = await getCoordinatesForCity(cityName);
+  const coordinates = await getCoordinatesCity(cityName);
   const url = `${METEO_API_URL}?latitude=${coordinates.lat}&longitude=${coordinates.lng}&current_weather=True`;
 
   const response = await axios.get(url);
