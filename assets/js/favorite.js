@@ -11,7 +11,7 @@ function showAlert(id, type) {
   }
   setTimeout(() => {
     alert.classList.replace('opacity-1', 'opacity-0');
-  }, 5000);
+  }, 3000);
 }
 
 function loadFav() {
@@ -23,6 +23,11 @@ function loadFav() {
   }
 }
 
+function cleanFav() {
+  localStorage.clear()
+  window.location.href = 'index.html'
+}
+
 function changeFav(event) {
   var id = event.target.dataset.id;
   if (id == undefined) {
@@ -31,12 +36,32 @@ function changeFav(event) {
   else if (!tabFav.includes(id)) {
     event.target.setAttribute('fill', 'red');
     tabFav.push(id)
+    localStorage.setItem("favoris", JSON.stringify(tabFav))
     showAlert(id, 'success')
   }
-  localStorage.setItem("favoris", JSON.stringify(tabFav))
 }
 
-function cleanFav() {
-  localStorage.clear()
-  window.location.href = 'index.html'
+function removeFav() {
+  const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  for (const checkedBox of checkedBoxes) {
+    index = checkedBox.id.split('-')[1];
+    var cityToRemove = tabFav[index];
+    tabFav.splice(cityToRemove, 1);
+  }
+  localStorage.setItem('favoris', JSON.stringify(tabFav));
+  location.reload();
+}
+
+function updateDelBtn() {
+  button = document.getElementById('del-button');
+  const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  if (checkedBoxes.length >= 1) {
+    button.removeAttribute('disabled')
+    button.classList.remove('cursor-not-allowed')
+    button.innerHTML = `Retirer ${checkedBoxes.length} élément(s)`
+  } else {
+    button.setAttribute('disabled', true)
+    button.classList.add('cursor-not-allowed')
+    button.innerHTML = 'Retirer'
+  }
 }

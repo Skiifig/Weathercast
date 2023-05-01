@@ -20,7 +20,6 @@ async function getCoordinatesCity(cityName) {
   }
 }
 
-// Fonction pour récupérer les prévisions météorologiques pour une ville donnée
 async function getWeatherForCity(cityName) {
   const coordinates = await getCoordinatesCity(cityName);
   const url = `${METEO_API_URL}?latitude=${coordinates.lat}&longitude=${coordinates.lng}&current_weather=True`;
@@ -35,7 +34,7 @@ async function determineWeather(cityName) {
   var data = await getWeatherForCity(cityName);
   var temp = data['current_weather']['temperature'];
   var time = data['current_weather']['is_day'];
-  var weather_code = data['current_weather']['weathercode'];
+  var weather_code = data['current_weather']['weathercode']
   switch (time) {
     case 0:
       return ['Nuit', temp]
@@ -45,7 +44,7 @@ async function determineWeather(cityName) {
           return ['Ensoleillé', temp]
         case 1:
         case 2:
-          return ['Partiellement_ensoleillé', temp]
+          return ['Partiellement ensoleillé', temp]
         case 3:
           return ['Nuageux', temp]
         case 45:
@@ -79,6 +78,7 @@ async function fillWeather() {
     var city = document.querySelectorAll('p')[index].innerHTML;
     var bg = document.querySelectorAll('.pt-10')[index];
     var infos = await determineWeather(city);
+    console.log(infos[0])
     switch (infos[0]) {
       case 'Nuit':
         temp_field.classList.remove('text-white');
@@ -89,7 +89,7 @@ async function fillWeather() {
         bg.src = './assets/img/sun.png';
         bg.classList.add('bg-blue-500');
         break;
-      case 'Partiellement_ensoleillé':
+      case 'Partiellement ensoleillé':
         bg.src = './assets/img/sun_cloud.png';
         bg.classList.add('bg-blue-400');
         break;

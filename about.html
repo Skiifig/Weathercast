@@ -9,7 +9,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </head>
-<body class="">
+<body class="overflow-hidden">
   <nav class="bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <div class="flex items-center">
@@ -42,89 +42,78 @@
 
   <div class="p-4 bg-gray-900 px-8" id="accordion-collapse" data-accordion="collapse">
     <h2 id="accordion-collapse-heading-1">
-      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 rounded-t-xl text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-1" aria-controls="accordion-collapse-body-1">
+      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 rounded-t-xl text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-1">
         <span>Comment marche Weathercast ?</span>
         <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
       </button>
     </h2>
-    <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+    <div id="accordion-collapse-body-1" class="hidden">
       <div class="p-5 border border-b-0 border-gray-700 bg-gray-900">
-        <p class="mb-2 text-gray-400">Weathercast marche grâce à ElectronJS.</p>
-        <p class="text-gray-400">Il s'agit d'un module node qui permet de développer des applications pour bureau à partir de fichiers html.</p>
+        <p class="mb-2 text-gray-400">Weathercast marche grâce à Electron. Il s'agit d'un environnement permettant de développer des applications bureau avec des technologies web</p>
+        <p class="text-gray-400">Electron a notamment permis de développer Discord, Spotify, Skype, Twitch, etc...</p>
       </div>
     </div>
     <h2 id="accordion-collapse-heading-2">
-      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-2" aria-controls="accordion-collapse-body-2">
+      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-2">
         <span>Quelles sont les API utilisées dans Weathercast ?</span>
         <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
       </button>
     </h2>
-    <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+    <div id="accordion-collapse-body-2" class="hidden">
       <div class="p-5 border border-b-0 border-gray-700 bg-gray-900">
         <p class="mb-2 text-gray-400">Les API utilisées dans Weathercast sont :</p>
         <ul class="max-w-md-space-y-1 text-gray-400 list-inside">
           <li class="flex items-center">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class="w-5 h-5 m-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"></path>
             </svg>
             Nominatim
           </li>
           <li class="flex items-center">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class="w-5 h-5 m-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
             </svg>
             Open-meteo
           </li>
           <li class="flex items-center">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class="w-5 h-5 m-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"></path>
             </svg>
             Geonames
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 m-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Timezonedb
           </li>
         </ul>
       </div>
     </div>
     <h2 id="accordion-collapse-heading-3">
-      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-3" aria-controls="accordion-collapse-body-3">
+      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-3">
         <span>Comment est géré le CSS de Weathercast ?</span>
         <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
       </button>
     </h2>
-    <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+    <div id="accordion-collapse-body-3" class="hidden">
       <div class="p-5 border border-b-0 border-gray-700 bg-gray-900">
         <p class="mb-2 text-gray-400">Le CSS est géré par Tailwind.</p>
         <p class="text-gray-400">Tailwind CSS est un framework CSS qui fournit des classes CSS préconçues pour faciliter la création d'un site web.</p>
       </div>
     </div>
     <h2 id="accordion-collapse-heading-4">
-      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-4" aria-controls="accordion-collapse-body-4">
-        <span>Comment marche le serveur Weathercast ?</span>
-        <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-      </button>
-    </h2>
-    <div id="accordion-collapse-body-4" class="hidden" aria-labelledby="accordion-collapse-heading-4">
-      <div class="p-5 border border-b-0 border-gray-700 bg-gray-900">
-        <p class="mb-2 text-gray-400">Weathercast n'utilise pas de serveur</p>
-      </div>
-    </div>
-    <h2 id="accordion-collapse-heading-5">
-      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-5" aria-controls="accordion-collapse-body-5">
+      <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left bg-gray-700 border border-gray-900 focus:ring-gray-800 text-gray-400 hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-4">
         <span>Le code de Weathercast est-il open source ?</span>
         <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
       </button>
     </h2>
-    <div id="accordion-collapse-body-5" class="hidden" aria-labelledby="accordion-collapse-heading-5">
+    <div id="accordion-collapse-body-4" class="hidden">
       <div class="p-5 border border-gray-700 bg-gray-900">
         <p class="mb-2 text-gray-400">Oui le code de Weathercast est open source.</p>
         <p class="text-gray-400">Il est consultable via le github associé <a class="text-blue-700 hover:underline" href="https://github.com/Skiifig/Weathercast">ici</a>.</p>
       </div>
     </div>
   </div>
-
-  <footer class="shadow bg-gray-800 border-gray-300 border-t-2">
-    <div class="w-full mx-auto max-w-screen-xl p-4 items-center flex justify-between">
-      <h5 class="text-sm text-center text-gray-400 mx-auto">Weathercast © 2023</h5>
-    </div>
-  </footer>
 </body>
 </html>
