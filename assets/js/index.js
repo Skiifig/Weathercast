@@ -78,7 +78,6 @@ async function fillWeather() {
     var city = document.querySelectorAll('p')[index].innerHTML;
     var bg = document.querySelectorAll('.pt-10')[index];
     var infos = await determineWeather(city);
-    console.log(infos[0])
     switch (infos[0]) {
       case 'Nuit':
         temp_field.classList.remove('text-white');

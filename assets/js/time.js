@@ -97,10 +97,11 @@ export async function fillFavCard(city, time, weather, index=0) {
   const timeField = document.getElementById('hour-' + index);
   const tempField = document.getElementById('temperature-' + index);
   const modele = document.getElementById('favorite-card-' + index);
-  cityField.innerHTML = city
-  weatherField.innerHTML = weather[0]
-  timeField.innerHTML = time
-  tempField.innerHTML = weather[1] + '°C'
+  cityField.innerHTML = city;
+  weatherField.innerHTML = weather[0];
+  timeField.innerHTML = time;
+  tempField.innerHTML = weather[1] + '°C';
+  modele.lastChild.previousSibling.firstChild.nextSibling.href = modele.lastChild.previousSibling.firstChild.nextSibling.href + city;
   switch (weather[0]) {
     case 'Nuit':
       background.src = './assets/img/moon.png';
@@ -138,9 +139,9 @@ export async function fillFavCard(city, time, weather, index=0) {
 }
 
 export function fillModal(city, index=0) {
-  var fav = document.getElementById('element-' + index)
-  var checkbox = fav.getElementsByClassName('checkbox')
-  checkbox[0].id = 'checkbox-' + index
-  checkbox[1].setAttribute('for', 'checkbox-' + index)
-  checkbox[1].innerHTML = city
+  var fav = document.getElementById('element-' + index);
+  var checkbox = fav.getElementsByClassName('checkbox');
+  checkbox[0].id = 'checkbox-' + index;
+  checkbox[1].setAttribute('for', 'checkbox-' + index);
+  checkbox[1].innerHTML = city;
 }
