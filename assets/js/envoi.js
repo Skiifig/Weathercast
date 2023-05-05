@@ -1,10 +1,17 @@
 function envoi() {
-    var requete = document.getElementById('search-input');
-    window.location.href = 'recherche.html?requete=' + encodeURIComponent(requete.value);
+  const requete = document.getElementById('search-input');
+  const date = new Date();
+  dictHis = JSON.parse(localStorage.getItem('history')) || {}
+  console.log(dictHis)
+  dictHis[requete.value] = date.getTime()
+  localStorage.setItem('history', JSON.stringify(dictHis))
+  // window.location.href = 'recherche.html?requete=' + encodeURIComponent(requete.value);
 }
 
-document.addEventListener("keyup", function(event) {
-    if (event.key == "Enter") {
-        envoi();
-    }
-});
+function checkEnter(event) {
+  if (event.keyCode === 13 && event.target.nodeName === "INPUT") {
+    envoi();
+  }
+}
+
+document.addEventListener("keydown", checkEnter);

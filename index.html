@@ -5,15 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./assets/js/envoi.js"></script>
-  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/weather.js"></script>
   <script src="./assets/js/favorite.js"></script>
   <script src="./assets/js/autocomp.js"></script>
+  <script src="./assets/js/history.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </head>
-<body onload="fillWeather(), loadFav()">
+<body onload="fillWeather(), loadFav(), loadHistory()">
   <section id="alert-success" class="transition-opacity opacity-0 fixed mx-auto flex p-4 mb-4 bottom-0 text-sm rounded-lg bg-gray-800 text-green-400 z-20" role="alert">
     <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="green" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
     <div id="alert-text"></div>
@@ -60,30 +61,30 @@
           <div class="text-center text-white font-semibold text-xl p-3">Historique</div>
           <div class="relative overflow-x-auto shadow-md rounded-lg">
             <table class="w-full text-sm text-left text-gray-400">
-                <thead class="text-xs uppercase bg-gray-500 text-gray-200">
-                  <tr>
-                    <th scope="col" class="px-4 py-2">Recherche</th>
-                    <th scope="col" class="px-4 py-2">Temps</th>
-                    <th scope="col" class="px-4 py-2">Lien</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="border-b bg-gray-900 border-gray-700 animate-pulse max-w-sm">
-                    <th scope="row" class="p-4">
-                      <div class="h-3 bg-gray-700 w-16 rounded-full"></div>
-                    </th>
-                    <td class="p-4">
-                      <div class="h-3 bg-gray-700 w-16 rounded-full"></div>
-                    </td>
-                    <td class="px-3 py-2">
-                      <a onclick="showAlert('warning')" data-drawer-hide="drawer-settings" class="font-medium text-blue-500 hover:underline">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"></path>
-                        </svg>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
+              <thead class="text-xs uppercase bg-gray-500 text-gray-200">
+                <tr>
+                  <th scope="col" class="px-4 py-2">Recherche</th>
+                  <th scope="col" class="px-4 py-2">Temps</th>
+                  <th scope="col" class="px-4 py-2">Lien</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b bg-gray-900 border-gray-700 animate-pulse max-w-sm">
+                  <th class="p-4">
+                    <div class="h-3 bg-gray-700 w-16 rounded-full"></div>
+                  </th>
+                  <td class="p-4">
+                    <div class="h-3 bg-gray-700 w-16 rounded-full"></div>
+                  </td>
+                  <td class="px-3 py-2">
+                    <a onclick="showAlert('warning')" data-drawer-hide="drawer-settings" class="cursor-pointer font-medium text-blue-500 hover:underline">
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"></path>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -315,7 +316,7 @@
     </div>
   </section>
 
-  <footer class="shadow bg-gray-800 border-gray-300 border-t-2">
+  <footer class="shadow bg-gray-800 border-gray-500 border-t-2">
     <div class="w-full mx-auto max-w-screen-xl p-4 items-center flex justify-between">
       <h5 class="text-sm text-center text-gray-400 mx-auto">Weathercast © 2023</h5>
     </div>

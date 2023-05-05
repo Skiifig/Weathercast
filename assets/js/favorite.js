@@ -74,3 +74,13 @@ function updateDelBtn() {
     button.innerHTML = 'Retirer'
   }
 }
+
+function selectAll() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+  for (const checkbox of checkboxes) {
+    if (!checkbox.checked) {
+      checkbox.checked = true
+    }
+  }
+  updateDelBtn();
+}

@@ -28,12 +28,12 @@ function updateAutocomp() {
     const suggestionsCities = document.getElementById('suggestions');
     suggestionsCities.innerHTML = '';
     const cities = getAllCities();
-    var matches = cities.filter(suggestion => suggestion.toLowerCase().startsWith(input));
+    var matches = Array.from(new Set(cities.filter(suggestion => !/\d/.test(suggestion) && suggestion.toLowerCase().startsWith(input))))
 
     for (let i = 0; i < 3; i++) {
         const li = document.createElement('li');
         li.innerText = matches[i];
-        li.classList.add('bg-gray-700', 'cursor-pointer', 'hover:bg-blue-600', 'text-left', 'p-3')
+        li.classList.add('bg-gray-400', 'cursor-pointer', 'hover:bg-blue-600', 'text-left', 'p-3')
         li.setAttribute('onclick', `copyLi('${li.innerHTML}')`)
         if (matches[i] != undefined) {
             suggestionsCities.appendChild(li)
