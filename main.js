@@ -15,5 +15,5 @@ app.on("ready", () => {
     },
   });
   mainWindow.webContents.openDevTools()
-  mainWindow.loadURL(`file://${__dirname}/recherche.html`);
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
 });

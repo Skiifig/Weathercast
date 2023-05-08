@@ -9,12 +9,13 @@
   <script src="./assets/js/favorite.js"></script>
   <script src="./assets/js/autocomp.js"></script>
   <script src="./assets/js/history.js"></script>
+  <script src="./assets/js/colors.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </head>
-<body onload="fillWeather(), loadFav(), loadHistory()">
+<body onload="fillWeather(), loadFav(), loadHistory(), getTheme()" onfocus="getTheme()">
   <section id="alert-success" class="transition-opacity opacity-0 fixed mx-auto flex p-4 mb-4 bottom-0 text-sm rounded-lg bg-gray-800 text-green-400 z-20" role="alert">
     <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="green" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
     <div id="alert-text"></div>
@@ -51,14 +52,11 @@
           </button>
         </div>
         <div class="flex items-center justify-between">
-          <h6 class="font-semibold text-white mb-6">Thème sombre</h6>
-          <label class="relative inline-flex items-center mb-4 cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" checked>
-            <div class="w-11 h-6 bg-yellow-400 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-800 bg-gray-700 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all border-gray-600 peer-checked:bg-gray-900"></div>
-          </label>
+          <h6 class="font-semibold text-white mb-3">Thème</h6>
+          <span class="flex mb-3 w-5 h-5 bg-gray-900 rounded-full border-2 border-white cursor-pointer" onclick="toggleWindow()"></span>
         </div>
         <div class="mb-6">
-          <div class="text-center text-white font-semibold text-xl p-3">Historique</div>
+          <div class="text-center text-white font-semibold text-xl pb-4">Historique</div>
           <div class="relative overflow-x-auto shadow-md rounded-lg">
             <table class="w-full text-sm text-left text-gray-400">
               <thead class="text-xs uppercase bg-gray-500 text-gray-200">
