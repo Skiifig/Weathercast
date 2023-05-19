@@ -71,7 +71,7 @@ async function determineWeather(cityName) {
   }
 }
 
-async function fillWeather() {
+async function fillIndex() {
   const nb = document.querySelectorAll('.weather-card').length;
   for (let index = 0; index < nb; index++) {
     var temp_field = document.querySelectorAll('.temperature')[index];
@@ -118,4 +118,37 @@ async function fillWeather() {
       }
     temp_field.innerHTML = Math.round(infos[1]) + '°C' 
   };
+}
+
+async function fillSearch() {
+  var requete = reception()
+  var coordinates = await getCoordinatesCity(requete)
+  var dailyRequest = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coordinates.lat}&longitude=${coordinates.lng}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,precipitation_probability_mean&timezone=CET`)
+  console.log(dailyRequest.data)
+  const title = document.getElementsByClassName('title')[0]
+  var infos = await determineWeather(requete);
+  const description = document.getElementsByClassName('description')[0]
+  const temp = document.getElementsByClassName('temp')[0]
+
+  title.innerHTML = requete
+  description.innerHTML = infos[0]
+  temp.innerHTML = Math.round(infos[1]) + '°C'
+  switch (infos[0]) {
+    case 'Nuit':
+      break;
+    case 'Ensoleillé':
+      break;
+    case 'Partiellement ensoleillé':
+      break;
+    case 'Nuageux':
+      break;
+    case 'Pluvieux':
+      break;
+    case 'Brouillard':
+      break;
+    case 'Averses':
+      break;
+    case 'Orageux':
+      break;
+    }
 }
