@@ -1,19 +1,21 @@
 const axios = require('axios');
-const xml2js = require('xml2js')
+const xml2js = require('xml2js');
+
+// Variables génériques
 
 const TIMEZONE_API_KEY = "GHH8TI463XCM";
 const TIMEZONE_API_URL = "http://api.timezonedb.com/v2.1"
 const GEOCODING_API_URL = "https://nominatim.openstreetmap.org/";
 const METEO_API_URL = 'https://api.open-meteo.com/v1/forecast';
 
-async function getCoordinatesCity(cityName) {
-  const url = `${GEOCODING_API_URL}?q=${encodeURIComponent(cityName)}&format=json`;
-  const response = await axios.get(url);
-  const data = response.data;
+async function getCoordinatesCity(cityName) { // Transformation de la ville en coordonnées GPS
+  const url = `${GEOCODING_API_URL}?q=${encodeURIComponent(cityName)}&format=json`; // Url de la requête
+  const response = await axios.get(url); // Requête HTTP
+  const data = response.data; // Obtention des données
 
   if (data.length > 0) {
     const city = data[0];
-    return {
+    return { // Défintion d'un dictionnaires avec les coordonnées
       lat: city.lat,
       lng: city.lon
     };
@@ -22,25 +24,25 @@ async function getCoordinatesCity(cityName) {
   }
 }
 
-export async function getCityTime(city) {
-  const coordinates = await getCoordinatesCity(city)
+export async function getCityTime(city) { // Obtenir l'heure local à partir de la ville
+  const coordinates = await getCoordinatesCity(city) // Obtention des coordonnées
   const url = TIMEZONE_API_URL + `/get-time-zone?key=${TIMEZONE_API_KEY}&by=position&lat=${coordinates.lat}&lng=${coordinates.lng}`
   const response = await axios.get(url);
   var data = response.data
 
   let res;
-  xml2js.parseString(data, (err, result) => {
+  xml2js.parseString(data, (err, result) => { // Transformation du format du résultat en JSON
     if (err) {
       console.log(err)
     } else {
       const resultat = result.result.formatted[0]
-      res = resultat.split(' ')[1].split(':')[0] + 'h' + resultat.split(' ')[1].split(':')[1]
+      res = resultat.split(' ')[1].split(':')[0] + 'h' + resultat.split(' ')[1].split(':')[1] // Reformatage pour obtenir l'heure
     }
   })
   return res
 }
 
-async function getWeatherForCity(cityName) {
+async function getWeatherForCity(cityName) { // Obtention du temps actuel
   const coordinates = await getCoordinatesCity(cityName);
   const url = `${METEO_API_URL}?latitude=${coordinates.lat}&longitude=${coordinates.lng}&current_weather=True`;
 
@@ -53,8 +55,8 @@ async function getWeatherForCity(cityName) {
 export async function determineWeather(cityName) {
   var data = await getWeatherForCity(cityName);
   var temp = data['current_weather']['temperature'];
-  var time = data['current_weather']['is_day'];
-  var weather_code = data['current_weather']['weathercode'];
+  var time = data['current_weather']['is_day']; // Moment de la journée
+  var weather_code = data['current_weather']['weathercode']; // Code permettant d'avoir la météo
   switch (time) {
     case 0:
       return ['Nuit', temp]
@@ -91,7 +93,7 @@ export async function determineWeather(cityName) {
   }
 }
 
-export async function fillFavCard(city, time, weather, index=0) {
+export async function fillFavCard(city, time, weather, index=0) { // Remplissage de la carte de favori
   const background = document.getElementById('background-'+ index);
   const cityField = document.getElementById('city-' + index);
   const weatherField = document.getElementById('weather-' + index);
@@ -102,11 +104,11 @@ export async function fillFavCard(city, time, weather, index=0) {
   weatherField.innerHTML = weather[0];
   timeField.innerHTML = time;
   tempField.innerHTML = weather[1] + '°C';
-  modele.lastChild.previousSibling.firstChild.nextSibling.href = modele.lastChild.previousSibling.firstChild.nextSibling.href + city;
+  modele.lastChild.previousSibling.firstChild.nextSibling.href = modele.lastChild.previousSibling.firstChild.nextSibling.href + city; // Mise à jour du lien de la carte
   switch (weather[0]) {
     case 'Nuit':
-      background.src = './assets/img/moon.png';
-      modele.classList.add('bg-blue-900');
+      background.src = './assets/img/moon.png'; // Changement de l'image
+      modele.classList.add('bg-blue-900'); // Changement de la couleur du fond
       break;
     case 'Ensoleillé':
       background.src = './assets/img/sun.png';
@@ -139,7 +141,7 @@ export async function fillFavCard(city, time, weather, index=0) {
   }
 }
 
-export function fillModal(city, index=0) {
+export function fillModal(city, index=0) { // Remplissage du modal de suppression
   var fav = document.getElementById('element-' + index);
   var checkbox = fav.getElementsByClassName('checkbox');
   checkbox[0].id = 'checkbox-' + index;
