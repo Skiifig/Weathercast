@@ -2,6 +2,7 @@ const axios = require('axios');
 const xml2js = require('xml2js')
 
 const TIMEZONE_API_KEY = "GHH8TI463XCM";
+const TIMEZONE_API_URL = "http://api.timezonedb.com/v2.1"
 const GEOCODING_API_URL = "https://nominatim.openstreetmap.org/";
 const METEO_API_URL = 'https://api.open-meteo.com/v1/forecast';
 
@@ -23,7 +24,7 @@ async function getCoordinatesCity(cityName) {
 
 export async function getCityTime(city) {
   const coordinates = await getCoordinatesCity(city)
-  const url = `http://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONE_API_KEY}&by=position&lat=${coordinates.lat}&lng=${coordinates.lng}`
+  const url = TIMEZONE_API_URL + `/get-time-zone?key=${TIMEZONE_API_KEY}&by=position&lat=${coordinates.lat}&lng=${coordinates.lng}`
   const response = await axios.get(url);
   var data = response.data
 
