@@ -76,8 +76,8 @@ async function determineWeather(cityName) {
   }
 }
 
-async function fillIndex() {
-  const nb = document.querySelectorAll('.weather-card').length;
+async function fillIndex() { // Remplissage de la page d'index
+  const nb = document.querySelectorAll('.weather-card').length; // Sélection du nombre de cartes
   for (let index = 0; index < nb; index++) {
     var temp_field = document.querySelectorAll('.temperature')[index];
     var city = document.querySelectorAll('p')[index].innerHTML;
@@ -86,8 +86,8 @@ async function fillIndex() {
     switch (infos[0]) {
       case 'Nuit':
         temp_field.classList.remove('text-white');
-        bg.src = './assets/img/moon.png';
-        bg.classList.add('bg-blue-900');
+        bg.src = './assets/img/moon.png'; // Changement du fond de la carte
+        bg.classList.add('bg-blue-900'); // Changement de la couleur du fond de la carte
         break;
       case 'Ensoleillé':
         bg.src = './assets/img/sun.png';
@@ -121,29 +121,29 @@ async function fillIndex() {
         bg.classList.add('bg-blue-900');
         break;
       }
-    temp_field.innerHTML = Math.round(infos[1]) + '°C' 
+    temp_field.innerHTML = Math.round(infos[1]) + '°C' // Mise à jour de la température
   };
 }
 
 // Partie recherche.html
 
-async function getHours(requete, coordinates) {
+async function getHours(requete, coordinates) { // Obtention de l'heure locale
   const hourRequest = await axios.get(TIMEZONE_API_URL + `/get-time-zone?key=${TIMEZONE_API_KEY}&by=position&lat=${coordinates.lat}&lng=${coordinates.lng}`)
-  var hourData = hourRequest.data
+  var hourData = hourRequest.data;
   let res;
 
   xml2js.parseString(hourData, (err, result) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-      const resultat = result.result.formatted[0]
-      res = resultat.split(' ')[1].split(":")[0]
+      const resultat = result.result.formatted[0];
+      res = resultat.split(' ')[1].split(":")[0];
     }
   })
-  return parseInt(res)
+  return parseInt(res);
 }
 
-async function fillInfos(requete, dailyData) {
+async function fillInfos(requete, dailyData) { // Remplissage des deux premières sections
   var windSpeed = dailyData['daily']['windspeed_10m_max'][0];
   var precipitationProba = dailyData['daily']['precipitation_probability_mean'][0];
   var lowestTemp = dailyData['daily']['temperature_2m_min'][0];
@@ -159,7 +159,7 @@ async function fillInfos(requete, dailyData) {
   const high_field = document.getElementsByClassName('high-temp')[0];
   const img = document.getElementById('img');
   const bg = document.getElementsByTagName('main')[0];
-
+  
   title.innerHTML = requete
   description.innerHTML = infos[0];
   temp.innerHTML = Math.round(infos[1]) + '°C';
@@ -170,8 +170,8 @@ async function fillInfos(requete, dailyData) {
 
   switch (infos[0]) {
     case 'Nuit':
-      img.src = './assets/img/moon.png';
-      bg.classList.add('from-blue-700', 'via-blue-800', 'to-blue-900');
+      img.src = './assets/img/moon.png'; // Changement de l'image
+      bg.classList.add('from-blue-700', 'via-blue-800', 'to-blue-900'); // Mise à jour du fond de la page
       break;
     case 'Ensoleillé':
       img.src = './assets/img/sun.png';
@@ -204,14 +204,14 @@ async function fillInfos(requete, dailyData) {
   }
 }
 
-async function fillHourly(requete, coordinates, hourlyData) {
+async function fillHourly(requete, coordinates, hourlyData) { // Remplissage de la section horraire
   var currentHour = await getHours(requete, coordinates)
-  for (let i = 1; i <= 20; i++) {
-    var container = document.getElementsByClassName('carousel-item')[i-1];
-    var hourlyWeather = hourlyData['hourly']['time'][currentHour += 1];
+  for (let i = 1; i <= 24; i++) {
+    var container = document.getElementsByClassName('carousel-item')[i-1]; // Sélection des composants
+    var hourlyWeather = hourlyData['hourly']['time'][currentHour += 1]; // Incrémentation de l'heure
     var hourlyTemp = hourlyData['hourly']['temperature_2m'][currentHour];
-    container.children[0].innerHTML = currentHour + ':00'
-    container.children[2].innerHTML = Math.round(hourlyTemp) + '°C';
+    container.children[0].innerHTML = currentHour + ':00' // Mise à jour de l'heure
+    container.children[2].innerHTML = Math.round(hourlyTemp) + '°C'; // Actualisation de la température
     switch (hourlyData['hourly']['is_day'][currentHour]) {
       case 0:
         container.children[1].src = './assets/img/moon.png'
@@ -252,26 +252,29 @@ async function fillHourly(requete, coordinates, hourlyData) {
             break
         }
     }
-    if (currentHour == 23) {currentHour = -1}
+    if (currentHour == 23) {currentHour = -1} // Si l'heure atteint 23 recommencer à 0
   }
 }
 
-async function fillDaily(dailyData) {
-  const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+async function fillDaily(dailyData) { // Remplissage de la section quotidienne
+  const days = ['Dim' ,'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
   const compoDays = document.getElementsByClassName('day-row');
   const compoSunrise = document.getElementsByClassName('sunrise');
   const compoSunset = document.getElementsByClassName('sunset');
-  var currentDay = new Date().getDay() - 2;
+  var currentDay = new Date().getDay(); // Suppression du décalage taille => index
   for (let i = 0; i < 7; i++) {
-    compoDays[i].children[0].innerHTML = days[currentDay += 1] + '.'
-    compoSunrise[i].children[1].innerHTML = dailyData['daily']['sunrise'][i].split('T')[1]
-    compoSunset[i].children[1].innerHTML = dailyData['daily']['sunset'][i].split('T')[1]
-    if (currentDay == 6) {currentDay = -1}
+    if (currentDay == 7) {currentDay = 0} // Si le jour actuel est le 7ème, recommencer à 0
+    compoDays[i].children[0].innerHTML = days[currentDay] + '.' // Mise à jour du jour de la semaine
+    compoSunrise[i].children[1].innerHTML = dailyData['daily']['sunrise'][i].split('T')[1] // Mise à jour de l'heure de lever du soleil
+    compoSunset[i].children[1].innerHTML = dailyData['daily']['sunset'][i].split('T')[1] // Mise à jour de l'heure de coucher du soleil
+    compoDays[i].children[1].children[0].innerHTML = Math.round(dailyData['daily']['temperature_2m_min'][i]) + '°C'
+    compoDays[i].children[1].children[2].innerHTML = Math.round(dailyData['daily']['temperature_2m_max'][i]) + '°C'
+    currentDay += 1 // Passage au jour suivant
   }
 }
 
-async function fillSearch() {
-  var requete = reception();
+async function fillSearch() { // Remplissage de la page de recherche (toutes les sections)
+  var requete = reception(); // Reception de la requête
   var coordinates = await getCoordinatesCity(requete);
   var base_url = `https://api.open-meteo.com/v1/forecast?latitude=${coordinates.lat}&longitude=${coordinates.lng}`
   var dailyRequest = await axios.get(base_url + '&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,precipitation_probability_mean,sunrise,sunset&timezone=CET')

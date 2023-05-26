@@ -104,7 +104,7 @@ export async function fillFavCard(city, time, weather, index=0) { // Remplissage
   weatherField.innerHTML = weather[0];
   timeField.innerHTML = time;
   tempField.innerHTML = weather[1] + '°C';
-  modele.lastChild.previousSibling.firstChild.nextSibling.href = modele.lastChild.previousSibling.firstChild.nextSibling.href + city; // Mise à jour du lien de la carte
+  modele.lastChild.previousSibling.firstChild.nextSibling.href = 'recherche.html?requete=' + city; // Mise à jour du lien de la carte
   switch (weather[0]) {
     case 'Nuit':
       background.src = './assets/img/moon.png'; // Changement de l'image

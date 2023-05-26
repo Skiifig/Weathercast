@@ -21,7 +21,7 @@ function showAlert(type, status_code=0, id=null) {
 function loadFav() {
   buttons = document.querySelectorAll('.btn-fav');
   for (const button of buttons) { // Pour chaque bouton
-    if (tabFav.includes(button.dataset.id)) { // Si la ville fait partie des favoris
+    if (tabFav.includes(button.dataset.id) || tabFav.includes(reception())) { // Si la ville fait partie des favoris
       button.setAttribute('fill', 'red'); // Mettre à jour la couleur du coeur
     }
   }
@@ -35,6 +35,8 @@ function cleanFav() {
 function changeFav(event) {
   var tabFav = JSON.parse(localStorage.getItem("favoris")) || []; // Récupération des favoris
   var id = event.target.dataset.id; // Récupération du nom de la ville
+  if (id == null) {id = reception()}
+  console.log(id)
   if (tabFav.includes(id)) { // Si la ville fait partie des favoris
     event.target.setAttribute('fill', 'none') // Mettre à jour la couleur du coeur
     index = tabFav.indexOf(id) // Récupération de l'index du favoris
