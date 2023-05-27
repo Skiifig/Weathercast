@@ -23,8 +23,8 @@
   </section>
 
   <section id="alert-warning" class="transition-opacity opacity-0 mx-auto flex fixed p-4 mb-4 text-sm bottom-0 rounded-lg bg-gray-800 text-yellow-400 z-20" role="alert">
-    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"></path></svg>    <div id="alert-text text-warning">Votre historique est vide</div>
-    <div id="alert-text text-warning"></div>
+    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"></path></svg>
+    <div id="alert-text text-warning">Votre historique est vide</div>
   </section>
 
   <nav class="bg-gray-900">
@@ -57,7 +57,9 @@
           <span class="flex mb-3 w-5 h-5 bg-gray-900 rounded-full border-2 border-white cursor-pointer" onclick="toggleWindow()"></span>
         </div>
         <div class="mb-6">
-          <div class="text-center text-white font-semibold text-xl pb-4">Historique</div>
+          <div class="text-center flex flex-column justify-center text-white font-semibold text-xl pb-4">
+            <span>Historique</span>
+          </div>
           <div class="relative overflow-x-auto shadow-md rounded-lg">
             <table class="w-full text-sm text-left text-gray-400">
               <thead class="text-xs uppercase bg-gray-500 text-gray-200">
