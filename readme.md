@@ -42,6 +42,6 @@ Pour développer ce projet nous avons utilisé les programmes/logiciels suivants
 Liste des membres du projet :
 * **Tristan** _alias_ [@Skiifig](https://github.com/Skiifig)
 * **Esteban** _alias_ [@esteban242005](https://github.com/esteban242005)
-* **Bénédictz** _alias_ [@tekane404](https://github.com/tekane404)
+* **Bénédicte** _alias_ [@tekane404](https://github.com/tekane404)
 
 Retrouvez la liste des contributeurs [ici](https://github.com/skiifig/Weathercast/contributors) pour voir qui à aidé au projet !
