@@ -14,6 +14,11 @@ function loadHistory() {
     }
 }
 
+function cleanHist() {
+  localStorage.removeItem("history") // Nettoyage des favoris
+  window.location.href = 'index.html' // Actualisation de la page
+}
+
 function fillEntry(history, entryContainer, index) {
   const cle = Object.keys(history)[index]
   const temps = new Date() - history[cle] // Calcul de la différence en ms entre maintenant et le moment de la recherche
